@@ -1,7 +1,8 @@
 // Imports inquirer package to be used in the file
-const inquirer = require('inquirer');
+import inquirer from 'inquirer';
 // Calls file system
-const fs = require('fs');
+import fs from 'fs';
+
 
 // Created an array of questions
 const questionPrompts = [
@@ -39,56 +40,62 @@ const questionPrompts = [
     },
 ];
 
-function init() {
-    inquirer.prompt(questionPrompts)
-        .then((answers) => {
-            // Calls the shapes constructor
-            const shapes = require('./lib/shapes.js');
+function init(){
+    inquirer.prompt(questionPrompts).then((answers) => {
 
-            // Creates the value of shape
-            let shape;
+   //Calls the shapes constructor
+    const {Shape, Triangle, Circle } = require('./lib/shapes');
 
-            // Passes the shape color, logo color and logo text to the constructor. 
-            // Switch statement to call a specific function 
-            switch (answers.logoShape) {
-                case 'Circle':
-                    shape = new shapes.Circle(answers.logoShapeColor, answers.logoTextColor, answers.logoText);
-                    break;
-                case 'Triangle':
-                    shape = new shapes.Triangle(answers.logoShapeColor, answers.logoTextColor, answers.logoText);
-                    break;
-                case 'Square':
-                    shape = new shapes.Shape(answers.logoShapeColor, answers.logoTextColor, answers.logoText);
-                    break;
-                default:
-                    console.log('Invalid shape selection.');
-                    return;
-            }
+    //Creates the value of shape
+    let shape;
 
-            // Calls the render function from the shapes file
-            const shapeTemp = shape.render();
+    //Switch statement to call a specfic function 
+    //Passes the shape color, logo color and logo text to the constructor. 
+    switch (answers.logoShape) {
+    case 'Circle':
+        shape = new Circle(answers.logoShapeColor,answers.logoTextColor, answers.logoText);
+        break;
+    case 'Triangle':
+        shape = new Triangle(answers.logoShapeColor,answers.logoTextColor, answers.logoText);
+        break;
+    case 'Square':
+        shape = new Shape(answers.logoShapeColor,answers.logoTextColor, answers.logoText);
+        break;
+    default:
+        console.log('Invalid shape selection.');
+        return;
+    }
 
-            // Calls the write to file function to create the file. 
-            writeToFile('./examples/newShape.svg', generateShape(shapeTemp));
-        })
-        .catch(error => {
-            console.error('Error occurred during prompt:', error);
-        });
+    //Calls the render function from the shapes file
+    const shapeTemp = shape.render();
+    
+    //Test condition
+    //console.log(shapeTemp);
+
+    // Calls the write to file function to create the file. 
+    writeToFile("./examples/newShape.svg" , generateShape(shapeTemp))
+    });
 }
 
 // Shapes generateShapes function to generate the svg file.
 function generateShape(shape) {
-    return `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200">${shape}</svg>`;
+
+    return `
+    <svg xmlns="http://www.w3.org/2000/svg" width="300" height="200">
+         ${shape}
+         
+    </svg>
+    `;
 }
 
-// Write to file function to write the data to the file
+//Write to file function to write the data to the file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) =>
-        /* Prints out error message if the file cannot be generated. 
-        Prints out successful message if the file generates. */
-        err ? console.error(err) : console.log('Shape generation is successful!')
+    // prints out error message if the file cannot be generate.
+    // prints out successful message if the file generates. 
+    err ? console.error(err) : console.log('Shape generation is successful!')
     );
 }
 
-// Calls the init function to run the application.
+//Calls the init function to run the application.
 init();
