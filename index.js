@@ -8,7 +8,7 @@ const questionPrompts = [
     {
         // Grabs the logo text from the command line prompt
         type: 'input',
-        message: 'Please enter logo text that is at least three characters long',
+        message: 'Please enter logo text that is at least three characters long:',
         name: 'logoText',
         // This will ensure input is only three characters
         validate: function(input) {
@@ -21,7 +21,7 @@ const questionPrompts = [
     {
         // Prompts the text color from the terminal input
         type: 'input',
-        message: 'Please enter logo text color value',
+        message: 'Please enter logo text color value:',
         name: 'logoTextColor',
     },
     {
@@ -34,7 +34,7 @@ const questionPrompts = [
     {
         // Prompt the user what color the logo should from terminal.
         type: 'input',
-        message: 'Enter shape color value',
+        message: 'Enter shape color value:',
         name: 'logoShapeColor',
     },
 ];
