@@ -1,5 +1,5 @@
 //Imports inquirer package to be used in the file
-const inquirer = require('inquirer');
+const inquirer =require('inquirer');
 
 //Calls file system
 const fs = require('fs');
@@ -45,7 +45,7 @@ function init(){
 inquirer.prompt(questionPrompts).then((answers) => {
 
 //Calls the shapes constructor
-const {Triangle, Circle, Shape } = require('./lib/shapes');
+const {Triangle, Circle, Shape } = require('./lib/shapes.js');
 
 //Creates the value of shape
 let shape;
