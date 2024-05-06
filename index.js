@@ -1,8 +1,7 @@
 // Imports inquirer package to be used in the file
-import inquirer from 'inquirer';
+const inquirer = require('inquirer')
 // Calls file system
-import fs from 'fs';
-
+const fs = require('fs')
 
 // Created an array of questions
 const questionPrompts = [
